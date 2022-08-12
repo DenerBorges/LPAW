@@ -16,9 +16,9 @@ const init = () => {
 	CANVAS = document.querySelector('canvas')
 	CTX = CANVAS.getContext('2d')
 	keyPress(CANVAS)
-	loop()
+	//loop()
 }
-
+/*
 const loop = () => {
     setTimeout(() => {
 		CTX.clearRect(0,0,CANVAS.width,CANVAS.height)
@@ -32,10 +32,10 @@ const loop = () => {
 		orange.draw(CTX)
 		red.draw(CTX)
 
-		smile.colide(red) && console.error('SMILE COLIDE')
+		smile.collide(red) && console.error('SMILE COLLIDE')
 
 		requestAnimationFrame(loop)
 	}, 1000/FRAMES)
 }
-
+*/
 export {init}

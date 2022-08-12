@@ -1,9 +1,10 @@
 export default class Smile {
-    constructorS(x, y, sa, ea, speed = 10, fcolor = "#FF0", scolor = "#000") {
+    constructorS(x, y, sa, ea, r, speed = 10, fcolor = "#FF0", scolor = "#000") {
         this.x = x;
         this.y = y;
         this.sa = sa;
         this.ea = ea;
+        this.r = r;
         this.speed = speed;
         this.fcolor = fcolor;
         this.scolor = scolor;
@@ -14,7 +15,9 @@ export default class Smile {
         ctx.lineWidth = 5;
         ctx.fillStyle = this.fcolor;
         ctx.strokeStyle = this.scolor;
-        ctx.arc(this.x, this.y, this.sa, this.ea);
+        ctx.arc(this.x, this.y, this.sa, this.ea, this.r);
+        ctx.fill();
+        ctx.stroke();
     };
 
     anda(limits, key) {
@@ -59,7 +62,7 @@ export default class Smile {
     }
 
     move(limits, key) {
-        let movements = {
+        /*let movements = {
             "w": { x: this.x, y: this.y - this.speed},
             "a": { x: this.x - this.speed, y: this.y},
             "d": { x: this.x + this.speed, y: this.y},
@@ -73,5 +76,5 @@ export default class Smile {
 
         this.x = this.x + this.sa > limits.width ? -this.sa: this.x
         this.x = this.x + this.sa < 0 ? limits.width -this.sa: this.x
-    };
+    */};
 }
