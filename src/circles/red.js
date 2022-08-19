@@ -1,11 +1,11 @@
-import Smile from "./smile";
+import Circ from "./circ";
 
-export default class Red extends Smile {
-    constructorR(x, y, sa, ea, r, color = "#F00") {
+export default class Red extends Circ {
+    constructorR(x, y, size, r, color = "#F00") {
         this.x = x;
         this.y = y;
-        this.sa = sa;
-        this.ea = ea;
+        this.size = size;
+        this.c = c;
         this.r = r;
         this.color = color;
     }
@@ -13,6 +13,7 @@ export default class Red extends Smile {
     draw(ctx) {
         ctx.lineWidth = 5;
         ctx.fillStyle = this.color;
-        ctx.arc(this.x, this.y, this.sa, this.ea, this.r);
+        ctx.arc(this.x, this.y, this.size, this.r);
+        ctx.fill();
     };
 }

@@ -1,25 +1,23 @@
-export default class Smile {
-    constructorS(x, y, sa, ea, r, speed = 10, fcolor = "#FF0", scolor = "#000") {
+import Circ from "./circ";
+export default class Smile extends Circ{
+    constructorS(x, y, size, c, r, color = "#FF0", speed = 10) {
         this.x = x;
         this.y = y;
-        this.sa = sa;
-        this.ea = ea;
+        this.size = size;
+        this.c= c;
         this.r = r;
+        this.color = color;
         this.speed = speed;
-        this.fcolor = fcolor;
-        this.scolor = scolor;
         this.status = "ArrowDown";
     }
 
     draw(ctx) {
         ctx.lineWidth = 5;
-        ctx.fillStyle = this.fcolor;
-        ctx.strokeStyle = this.scolor;
-        ctx.arc(this.x, this.y, this.sa, this.ea, this.r);
+        ctx.fillStyle = "#FF0";
+        ctx.arc(this.x, this.y, this.size, this.c, this.r);
         ctx.fill();
-        ctx.stroke();
     };
-
+    /*
     anda(limits, key) {
         switch (key) {
             case "w": this.status = "up"
@@ -44,25 +42,25 @@ export default class Smile {
         }
 
         if(this.x > limits.width)
-            this.x = -this.sa;
-        else if(this.x + this.sa < 0)
+            this.x = -this.size;
+        else if(this.x + this.size < 0)
             this.x = limits.width - this.size;
     }
 
     collide(Orange, limits) {
-        if(this.x + this.sa /2 - (Orange.x + Orange.sa /2)
-        && this.y + this.sa /2 - (Orange.y + Orange.sa /2)) {
+        if(this.x + this.size /2 - (Orange.x + Orange.size /2)
+        && this.y + this.size /2 - (Orange.y + Orange.size /2)) {
             Orange.x = Math.floor(Math.random() * limits.width);
             Orange.y = Math.floor(Math.random() * limits.width);
         }
     }
-
+    
     collide(Red) {
 
     }
 
     move(limits, key) {
-        /*let movements = {
+        let movements = {
             "w": { x: this.x, y: this.y - this.speed},
             "a": { x: this.x - this.speed, y: this.y},
             "d": { x: this.x + this.speed, y: this.y},
@@ -76,5 +74,5 @@ export default class Smile {
 
         this.x = this.x + this.sa > limits.width ? -this.sa: this.x
         this.x = this.x + this.sa < 0 ? limits.width -this.sa: this.x
-    */};
+    };*/
 }

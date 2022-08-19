@@ -1,3 +1,4 @@
+import Circ from "./circles/circ"
 import Smile from "./circles/smile"
 import Orange from "./circles/orange"
 import Red from "./circles/red"
@@ -7,9 +8,9 @@ let CTX
 let CANVAS
 const FRAMES = 15
 
-const smile = new Smile(80, 20, 20, 0, Math.PI / 180*360)
-const orange = new Orange(45, 30, 10, 0, Math.PI / 180*360)
-const red = new Red(130, 75, 20, 0, Math.PI / 180*360,'red')
+const smile = new Circ(80, 20, 20, 0, Math.PI / 180*360);
+const orange = new Circ(45, 30, 10, 0, Math.PI / 180*360);
+const red = new Circ(130, 75, 20, 0, Math.PI / 180*360,'red');
 
 const init = () => {
 	console.log("Initialize Canvas")
@@ -18,10 +19,10 @@ const init = () => {
 	keyPress(CANVAS)
 	//loop()
 }
-/*
+
 const loop = () => {
     setTimeout(() => {
-		CTX.clearRect(0,0,CANVAS.width,CANVAS.height)
+		CTX.clearSmile(0, 0, CANVAS.width, CANVAS.height)
 		
 		smile.move({
 			width:CANVAS.width,
@@ -37,5 +38,5 @@ const loop = () => {
 		requestAnimationFrame(loop)
 	}, 1000/FRAMES)
 }
-*/
+
 export {init}
