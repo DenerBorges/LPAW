@@ -1,19 +1,29 @@
 import Circ from "./circ";
 
 export default class Red extends Circ {
-    constructorR(x, y, size, r, color = "#F00") {
+    constructor(x, y, radius, lineWidth, color, fill = false, speed = 10) {
+        super();
         this.x = x;
         this.y = y;
-        this.size = size;
-        this.c = c;
-        this.r = r;
+        this.radius = radius;
+        this.lineWidth = lineWidth;
         this.color = color;
-    }
-
-    draw(ctx) {
-        ctx.lineWidth = 5;
-        ctx.fillStyle = this.color;
-        ctx.arc(this.x, this.y, this.size, this.r);
-        ctx.fill();
-    };
+        this.fill = fill;
+        this.speed = speed;
+        this.status = "ArrowDown";
+      }
+    
+      drawSmile(ctx) {
+        ctx.save();
+        ctx.lineWidth = this.lineWidth;
+        ctx.strokeStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, (Math.PI / 180) * 360);
+        ctx.stroke();
+        if (this.fill) {
+          ctx.fillStyle = this.fill;
+          ctx.fill();
+        }
+        ctx.restore();
+      }
 }

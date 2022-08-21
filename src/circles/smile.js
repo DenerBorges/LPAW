@@ -1,24 +1,32 @@
 import Circ from "./circ";
-export default class Smile extends Circ{
-    constructorS(x, y, size, c, r, color = "#FF0", speed = 10) {
-        this.x = x;
-        this.y = y;
-        this.size = size;
-        this.c= c;
-        this.r = r;
-        this.color = color;
-        this.speed = speed;
-        this.status = "ArrowDown";
-    }
+export default class Smile extends Circ {
+  constructor(x, y, radius, lineWidth, color, fill = false, speed = 10) {
+    super();
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.lineWidth = lineWidth;
+    this.color = color;
+    this.fill = fill;
+    this.speed = speed;
+    this.status = "ArrowDown";
+  }
 
-    draw(ctx) {
-        ctx.lineWidth = 5;
-        ctx.fillStyle = "#FF0";
-        ctx.arc(this.x, this.y, this.size, this.c, this.r);
-        ctx.fill();
-    };
-    /*
-    anda(limits, key) {
+  drawSmile(ctx) {
+    ctx.save();
+    ctx.lineWidth = this.lineWidth;
+    ctx.strokeStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, (Math.PI / 180) * 360);
+    ctx.stroke();
+    if (this.fill) {
+      ctx.fillStyle = this.fill;
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+  
+    anda(width, key) {
         switch (key) {
             case "w": this.status = "up"
             break;
@@ -41,38 +49,21 @@ export default class Smile extends Circ{
             break;
         }
 
-        if(this.x > limits.width)
-            this.x = -this.size;
-        else if(this.x + this.size < 0)
-            this.x = limits.width - this.size;
+        if(this.x > width)
+            this.x =- this.radius;
+        else if(this.x + this.radius < 0)
+            this.x = width - this.radius;
     }
 
-    collide(Orange, limits) {
-        if(this.x + this.size /2 - (Orange.x + Orange.size /2)
-        && this.y + this.size /2 - (Orange.y + Orange.size /2)) {
-            Orange.x = Math.floor(Math.random() * limits.width);
-            Orange.y = Math.floor(Math.random() * limits.width);
+    collide(Orange, width) {
+        if(this.x + this.radius /2 - (Orange.x + Orange.radius /2)
+        && this.y + this.radius /2 - (Orange.y + Orange.radius /2)) {
+            Orange.x = Math.floor(Math.random() * width);
+            Orange.y = Math.floor(Math.random() * width);
         }
     }
     
-    collide(Red) {
+    collide(Red, width) {
 
     }
-
-    move(limits, key) {
-        let movements = {
-            "w": { x: this.x, y: this.y - this.speed},
-            "a": { x: this.x - this.speed, y: this.y},
-            "d": { x: this.x + this.speed, y: this.y},
-            "s": { x: this.x, y: this.y + this.speed}
-        }
-
-        this.status = movements[key] ? key: this.status
-
-        this.x = movements[this.status].x
-        this.y = movements[this.status].y
-
-        this.x = this.x + this.sa > limits.width ? -this.sa: this.x
-        this.x = this.x + this.sa < 0 ? limits.width -this.sa: this.x
-    };*/
 }
