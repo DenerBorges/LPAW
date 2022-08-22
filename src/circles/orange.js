@@ -26,4 +26,11 @@ export default class Orange extends Circ {
         }
         ctx.restore();
       }
+
+      collide(smileX, smileY, smileRadius) {
+        let s = smileRadius + this.radius;
+        let x = smileX - this.x;
+        let y = smileY - this.y;
+        return s > Math.sqrt(x * x + y * y) ? true : false;
+      }
 }

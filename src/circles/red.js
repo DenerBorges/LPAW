@@ -1,3 +1,5 @@
+import { numeroRandom } from "../number";
+import { CANVAS } from "../init";
 import Circ from "./circ";
 
 export default class Red extends Circ {
@@ -25,5 +27,21 @@ export default class Red extends Circ {
           ctx.fill();
         }
         ctx.restore();
+      }
+
+      move() {
+        if (this.y <= CANVAS.height) {
+          this.y = this.y + this.speed;
+        } else {
+          this.y = 0;
+          this.x = numeroRandom(CANVAS.width - this.radius, this.radius);
+        }
+      }
+
+      collide(smileX, smileY, smileRadius) {
+        let s = smileRadius + this.radius;
+        let x = smileX - this.x;
+        let y = smileY - this.y;
+        return s > Math.sqrt(x * x + y * y) ? true : false;
       }
 }

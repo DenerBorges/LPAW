@@ -49,23 +49,11 @@ export default class Smile extends Circ {
             break;
         }
 
-        if(this.x > limits.width)
+        /*if(this.x > limits.width)
           this.x =- this.radius;
         else if(this.x + this.radius > 0)
           this.x = limits.width - this.radius;
-        //else if(this.x + this.radius < 0)
-          //this.x = limits.width - this.radius;
-    }
-
-    collide(Orange, limits) {
-        if(this.x + this.radius /2 - (Orange.x + Orange.radius /2)
-        && this.y + this.radius /2 - (Orange.y + Orange.radius /2)) {
-            Orange.x = Math.floor(Math.random() * limits.width);
-            Orange.y = Math.floor(Math.random() * limits.width);
-        }
-    }
-    
-    collide(Red, width) {
-
+        else if(this.x + limits.width < 0)
+          this.x = limits.width - this.radius;*/
     }
 }
