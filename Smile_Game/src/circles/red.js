@@ -3,7 +3,7 @@ import { CANVAS } from "../init";
 import Circ from "./circ";
 
 export default class Red extends Circ {
-    constructor(x, y, radius, lineWidth, color, fill = '#F00', speed = 10) {
+    constructor(x, y, radius, lineWidth, color, fill = '#F00', speed = 3) {
         super();
         this.x = x;
         this.y = y;

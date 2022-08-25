@@ -8,12 +8,12 @@ let CTX;
 export let CANVAS;
 let pontos = 0;
 let gameState = false;
-const FRAMES = 15;
+const FRAMES = 120;
 const redQuant = 5;
 const reds = [];
 
 const smile = new Smile(300, 200, 25, 5, "#000", "#FF0");
-const orange = new Orange(45, 30, 10, 5, "#FA0", "#FA0");
+const orange = new Orange(200, 300, 10, 5, "#FA0", "#FA0");
 const red = new Red(0, 0, 15, 5, "#F00", "#F00");
 
 function contaPontos() {

@@ -1,6 +1,7 @@
 import Circ from "./circ";
+import { CANVAS } from "../init";
 export default class Smile extends Circ {
-  constructor(x, y, radius, lineWidth, color, fill = false, speed = 10) {
+  constructor(x, y, radius, lineWidth, color, fill = false, speed = 3) {
     super();
     this.x = x;
     this.y = y;
@@ -9,7 +10,7 @@ export default class Smile extends Circ {
     this.color = color;
     this.fill = fill;
     this.speed = speed;
-    this.status = "ArrowDown";
+    this.status = "down";
   }
 
   drawSmile(ctx) {
@@ -26,7 +27,7 @@ export default class Smile extends Circ {
     ctx.restore();
   }
   
-    anda(limits, key) {
+    anda(CANVAS, key) {
         switch (key) {
             case "w": this.status = "up"
             break;
@@ -39,21 +40,14 @@ export default class Smile extends Circ {
         }
 
         switch (this.status) {
-            case "up": this.y -= this.speed
+            case "up": {if(this.y >= this.radius) this.y -= this.speed}
             break;
-            case "left": this.x -= this.speed
+            case "left": {if(this.x >= this.radius) this.x -= this.speed}
             break;
-            case "right": this.x += this.speed
+            case "right": {if(this.x <= CANVAS.width - this.radius) this.x += this.speed}
             break;
-            case "down": this.y += this.speed
+            case "down": {if(this.y <= CANVAS.height - this.radius) this.y += this.speed}
             break;
         }
-
-        /*if(this.x > limits.width)
-          this.x =- this.radius;
-        else if(this.x + this.radius > 0)
-          this.x = limits.width - this.radius;
-        else if(this.x + limits.width < 0)
-          this.x = limits.width - this.radius;*/
     }
 }
