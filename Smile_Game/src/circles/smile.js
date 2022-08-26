@@ -1,5 +1,4 @@
 import Circ from "./circ";
-import { CANVAS } from "../init";
 export default class Smile extends Circ {
   constructor(x, y, radius, lineWidth, color, fill = false, speed = 3) {
     super();
@@ -15,15 +14,15 @@ export default class Smile extends Circ {
 
   drawSmile(ctx) {
     ctx.save();
-    ctx.lineWidth = this.lineWidth;
-    ctx.strokeStyle = this.color;
+    this.drawRosto(ctx);
+    this.circRosto(ctx, this.x - this.radius / 2.5, this.y - this.radius / 4, this.radius * .1, 3, "#000", "#000");
+    this.circRosto(ctx, this.x + this.radius / 2.5, this.y - this.radius / 4, this.radius * .1, 3, "#000", "#000");   
+
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, (Math.PI / 180) * 360);
+    ctx.lineWidth = 2;
+    ctx.arc(this.x, this.y + this.radius / 4, this.radius / 2, 0, Math.PI);
+    ctx.strokeStyle = "#000";
     ctx.stroke();
-    if (this.fill) {
-      ctx.fillStyle = this.fill;
-      ctx.fill();
-    }
     ctx.restore();
   }
   

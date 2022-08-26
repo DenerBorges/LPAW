@@ -51,6 +51,7 @@ const loop = () => {
     setTimeout(() => {
     CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
     smile.drawCirc(CTX);
+    smile.drawSmile(CTX);
     orange.drawCirc(CTX);
     reds.forEach((red) => red.drawCirc(CTX));
 
