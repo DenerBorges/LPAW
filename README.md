@@ -2,7 +2,7 @@
 
 ## Smile Game
 
-<img src="/assets/Smile.gif" alt="Demonstração do Smile Game.">
+<img src="./Smile_Game/assets/Smile.gif" alt="Demonstração do Smile Game.">
 
 > Jogo do Smile desenvolvido para a disciplina de linguagem de programação para animação web no curso de Tecnologia em Sistemas para Internet.
 
