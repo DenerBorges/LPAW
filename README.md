@@ -8,6 +8,11 @@
 
 <hr>
 
+### Como Jogar?
+Teclas: W A S D
+
+<hr>
+
 Clone este projeto.
 
 ```bash
