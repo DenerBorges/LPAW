@@ -57,9 +57,3 @@ export default class Knight extends Circ {
         }
     }
 }
-
-/*const animeSprite = ()=>{
-	setInterval(() => {
-		//this.x = this.x < totalSprites - 1 ? this.x + 1 : 0;
-	}, 1000 / (frames*spriteSpeed/10))
-}*/
