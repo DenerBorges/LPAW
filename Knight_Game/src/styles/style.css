@@ -1,0 +1,16 @@
+@font-face {
+	font-family: "Pixel";
+	src: url("PressStart2P.ttf") format("truetype");
+}
+body {
+	display: flex;
+	justify-content: center;
+	background-color: rgba(61, 61, 61, 0.989)
+}
+
+canvas {
+	border: 3px solid black;
+	background-color: aliceblue;
+	background-image: url("../../img/background.jpeg");
+	background-size: cover;
+}
