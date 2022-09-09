@@ -1,4 +1,5 @@
 import { hasKey, keyDown, keyPress } from "../keyboard";
+import { loadImage } from "../loaderAssets";
 import Circ from "./circle"
 
 export default class Knight extends Circ {
@@ -17,6 +18,22 @@ export default class Knight extends Circ {
         this.totalSprites = 3;
         this.knightImage = new Image();
         this.knightImage.src = "../../img/knight_down.png";
+        //this.count = 7;
+
+    }
+
+    async loadsprites() {
+        let knight_up = await loadImage("../../img/knight_up.png");
+        let knight_right = await loadImage("../../img/knight_right.png");
+        let knight_left = await loadImage("../../img/knight_left.png");
+        let knight_down = await loadImage("../../img/knight_down.png");
+
+        this.knightSprite = {
+            'up' : knight_up,
+            'right' : knight_right,
+            'left' : knight_left,
+            'down' : knight_down
+        }
     }
 
     drawKnight(ctx) {
@@ -26,34 +43,51 @@ export default class Knight extends Circ {
         ctx.arc(this.x, this.y, this.radius, this.line, (Math.PI / 180) * 360);
         ctx.restore();
 
-        if (this.spriteAtual < this.totalSprites) {ctx.drawImage(this.knightImage, this.spriteAtual * this.knightWidth, 0, this.knightWidth, this.knightHeight,
-            this.x - this.radius / 1.1, this.y - this.radius / 0.8, this.knightWidth * 1.2, this.knightHeight * 1.2);
-            //this.spriteAtual++;
-        }
-        else this.spriteAtual = 1;
+        //if (this.count <= 0) {
+            if (this.spriteAtual < this.totalSprites ) {
+                ctx.drawImage(this.knightImage, this.spriteAtual * this.knightWidth, 0, this.knightWidth, this.knightHeight,
+                this.x - this.radius / 1.1, this.y - this.radius / 0.8, this.knightWidth * 1.2, this.knightHeight * 1.2);
+                this.spriteAtual++;
+            }
+            else this.spriteAtual = 1;
+           // this.count = 7;
+       // } else {
+         //   this.count--;
+        //}
+
+     
     }
 
-    move(canvas, key) {
+    move(canvas, key, pressedKeys) {
         switch (key) {
-            case "w": this.status = "up"; this.knightImage.src = "../../img/knight_up.png";
+            case "w": this.status = "up"; this.knightImage = this.knightSprite[this.status];
             break;
-            case "a": this.status = "left"; this.knightImage.src = "../../img/knight_left.png";
+            case "a": this.status = "left"; this.knightImage = this.knightSprite[this.status];
             break;
-            case "d": this.status = "right"; this.knightImage.src = "../../img/knight_right.png";
+            case "d": this.status = "right"; this.knightImage = this.knightSprite[this.status];
             break;
-            case "s": this.status = "down"; this.knightImage.src = "../../img/knight_down.png";
+            case "s": this.status = "down"; this.knightImage = this.knightSprite[this.status];
             break;
         }
 
-        switch (this.status) {
-            case "up": {if(this.y >= this.radius) this.y -= this.speed}
-            break;
-            case "left": {if(this.x >= this.radius) this.x -= this.speed}
-            break;
-            case "right": {if(this.x <= canvas.width - this.radius) this.x += this.speed}
-            break;
-            case "down": {if(this.y <= canvas.height - this.radius) this.y += this.speed}
-            break;
+        if (pressedKeys.right === true && this.x <= canvas.width - this.radius) {
+            this.x += this.speed,
+            this.knightImage.src = "../../img/knight_right.png"
+        }
+
+        if (pressedKeys.left === true && this.x >= this.radius) {
+            this.x -= this.speed,
+            this.knightImage.src = "../../img/knight_left.png"
+        }
+
+        if (pressedKeys.up === true && this.y >= this.radius) {
+            this.y -= this.speed,
+            this.knightImage.src = "../../img/knight_up.png"
+        }
+
+        if (pressedKeys.down === true && this.y <= canvas.height - this.radius) {
+            this.y += this.speed,
+            this.knightImage.src = "../../img/knight_down.png"
         }
     }
 }

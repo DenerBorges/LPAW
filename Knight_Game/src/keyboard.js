@@ -1,9 +1,57 @@
 let keys = [];
 let key;
 
+
+let pressedKeys = {
+    left: {
+        pressed: false
+    },
+    right: {
+        pressed: false
+    },
+    up: {
+        pressed: false
+    },
+    down: {
+        pressed: false
+    }
+}
+
+if(pressedKeys.left === true) {
+    moveLeft()
+}
+
 function keyPress(element){
     element.addEventListener('keydown',event=>{
-        key = event.key
+        if (event.key === "d") {
+            pressedKeys.right = true
+        }
+         if (event.key === "a") {
+            pressedKeys.left = true
+        }
+         if (event.key === "w") {
+            pressedKeys.up = true
+        }
+         if (event.key === "s") {
+            pressedKeys.down = true
+        }
+
+        console.log(key)
+    })
+    element.addEventListener('keyup',event=>{
+        if (event.key === "d") {
+            pressedKeys.right = false
+        }
+         if (event.key === "a") {
+            pressedKeys.left = false
+        }
+         if (event.key === "w") {
+            pressedKeys.up = false
+        }
+         if (event.key === "s") {
+            pressedKeys.down = false
+        }
+
         console.log(key)
     })
 }
@@ -26,4 +74,5 @@ function removeKey(event){
 
 const hasKey = (searchKey)=>keys.find(key=>searchKey===key)
 
-export {keyDown, hasKey, keyPress, key}
+export {keyDown, hasKey, keyPress, key, pressedKeys}
+

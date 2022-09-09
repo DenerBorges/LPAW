@@ -1,4 +1,4 @@
-import { keyPress, key } from "./keyboard";
+import { keyPress, key, pressedKeys } from "./keyboard";
 import { numeroRandom } from "./number";
 import Knight from "./characters/knight";
 import Coin from "./characters/coin";
@@ -11,7 +11,7 @@ let gameState;
 const frames = 120;
 const arrowQuant = 5;
 const arrows = [];
-//let spriteSpeed = .5;
+let spriteSpeed = 7;
 
 let coinSound;
 let theme;
@@ -59,26 +59,26 @@ const init = async () => {
     deathSound.volume = .06;
     gameState = true;
     loop();
-    //animeSprite();
+    animeSprite();
 };
 
-/*const animeSprite = () => {
+const animeSprite = () => {
   setInterval(() => {
-
+knight.drawKnight(ctx);
   }, 1000 / (frames*spriteSpeed/10));
-}*/
+}
 
 const loop = () => {
     if (gameState) {
       setTimeout(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      knight.drawKnight(ctx);
+      
       coin.drawCoin(ctx);
       arrows.forEach((arrow) => arrow.drawArrow(ctx));
       knight.move({
         width:canvas.width,
         height:canvas.height
-      }, key);
+      }, key, pressedKeys);
 
       theme.currentTime == 0 && theme.play();
 
