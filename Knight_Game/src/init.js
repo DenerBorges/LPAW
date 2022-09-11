@@ -11,7 +11,7 @@ let gameState;
 const frames = 120;
 const arrowQuant = 5;
 const arrows = [];
-let spriteSpeed = 7;
+let spriteSpeed = 1;
 
 let coinSound;
 let theme;
@@ -49,14 +49,14 @@ const init = async () => {
     }
     theme = new Audio();
     theme.src = "../sound/magical_theme.flac";
-    theme.volume = .06;
+    theme.volume = .1;
     theme.loop = true;
     coinSound = new Audio();
     coinSound.src = "../sound/coin.flac";
     coinSound.volume = .06;
     deathSound = new Audio();
     deathSound.src = "../sound/death.mp3";
-    deathSound.volume = .06;
+    deathSound.volume = .1;
     gameState = true;
     loop();
     animeSprite();
@@ -64,7 +64,7 @@ const init = async () => {
 
 const animeSprite = () => {
   setInterval(() => {
-knight.drawKnight(ctx);
+
   }, 1000 / (frames*spriteSpeed/10));
 }
 
@@ -72,7 +72,7 @@ const loop = () => {
     if (gameState) {
       setTimeout(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+      knight.drawKnight(ctx);
       coin.drawCoin(ctx);
       arrows.forEach((arrow) => arrow.drawArrow(ctx));
       knight.move({

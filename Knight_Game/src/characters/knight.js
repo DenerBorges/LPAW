@@ -1,4 +1,4 @@
-import { hasKey, keyDown, keyPress } from "../keyboard";
+import { hasKey, keyDown, keyPress, pressedKeys } from "../keyboard";
 import { loadImage } from "../loaderAssets";
 import Circ from "./circle"
 
@@ -19,7 +19,6 @@ export default class Knight extends Circ {
         this.knightImage = new Image();
         this.knightImage.src = "../../img/knight_down.png";
         //this.count = 7;
-
     }
 
     async loadsprites() {
@@ -44,18 +43,17 @@ export default class Knight extends Circ {
         ctx.restore();
 
         //if (this.count <= 0) {
-            if (this.spriteAtual < this.totalSprites ) {
+            if (this.spriteAtual < this.totalSprites) {
                 ctx.drawImage(this.knightImage, this.spriteAtual * this.knightWidth, 0, this.knightWidth, this.knightHeight,
                 this.x - this.radius / 1.1, this.y - this.radius / 0.8, this.knightWidth * 1.2, this.knightHeight * 1.2);
                 this.spriteAtual++;
             }
-            else this.spriteAtual = 1;
-           // this.count = 7;
-       // } else {
-         //   this.count--;
+            else {
+            this.spriteAtual = 1;
+            //this.count = 7;
+        } //else {
+          //  this.count--;
         //}
-
-     
     }
 
     move(canvas, key, pressedKeys) {
