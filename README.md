@@ -20,7 +20,7 @@
 ### Como Jogar?
 Teclas: W A S D
 <br>
-Reiniciar : F5
+Reiniciar: F5
 
 <hr>
 
