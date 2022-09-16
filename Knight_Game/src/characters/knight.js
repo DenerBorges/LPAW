@@ -3,7 +3,7 @@ import { loadImage } from "../loaderAssets";
 import Circ from "./circle"
 
 export default class Knight extends Circ {
-    constructor(x, y, radius, line, scolor, speed = 3) {
+    constructor(x, y, radius, line,frames, scolor = null, speed = 3) {
         super();
         this.x = x;
         this.y = y;
@@ -11,27 +11,32 @@ export default class Knight extends Circ {
         this.line = line;
         this.scolor = scolor;
         this.speed = speed;
-        this.status = "";
+        this.stop = true;
         this.knightWidth = 44;
         this.knightHeight = 66;
         this.spriteAtual = 1;
         this.totalSprites = 3;
+        this.spriteSpeed = .5;
         this.knightImage = new Image();
         this.knightImage.src = "../../img/knight_down.png";
-        //this.count = 7;
+        this.loadsprites().then(()=>this.knightImage = this.knightSprite['down'] );
+        this.animeSprite(frames);
     }
 
+    animeSprite(frames) {
+          setInterval(() => {
+            if (this.stop == false)
+            this.spriteAtual = this.spriteAtual < this.totalSprites -1 ? this.spriteAtual + 1 : 0
+          }, 1000 / (frames*this.spriteSpeed/10));
+      };
+
     async loadsprites() {
-        let knight_up = await loadImage("../../img/knight_up.png");
-        let knight_right = await loadImage("../../img/knight_right.png");
-        let knight_left = await loadImage("../../img/knight_left.png");
-        let knight_down = await loadImage("../../img/knight_down.png");
 
         this.knightSprite = {
-            'up' : knight_up,
-            'right' : knight_right,
-            'left' : knight_left,
-            'down' : knight_down
+            'up' : await loadImage("../../img/knight_up.png"),
+            'right' : await loadImage("../../img/knight_right.png"),
+            'left' : await loadImage("../../img/knight_left.png"),
+            'down' : await loadImage("../../img/knight_down.png")
         }
     }
 
@@ -42,59 +47,45 @@ export default class Knight extends Circ {
         ctx.arc(this.x, this.y, this.radius, this.line, (Math.PI / 180) * 360);
         ctx.restore();
 
-        //if (this.count <= 0) {
-            //if (this.spriteAtual < this.totalSprites) {
-                ctx.drawImage(this.knightImage, this.spriteAtual * this.knightWidth, 0, this.knightWidth, this.knightHeight,
-                this.x - this.radius / 1.1, this.y - this.radius / 0.8, this.knightWidth * 1.2, this.knightHeight * 1.2);
-                this.spriteAtual++;
-            //}
-            /*else {
-            this.spriteAtual = 1;
-            //this.count = 7;
-        } //else {
-          //  this.count--;
-        //}*/
-        
-            this.spriteAtual = this.spriteAtual < this.totalSprites - 1 ? this.spriteAtual + 1 : 0  
-        if (pressedKeys.right === true && this.x <= canvas.width - this.radius) {
-            this.x += this.speed,
-            this.totalSprites = 3,
-            this.knightImage.src = "../../img/knight_right.png"
+        ctx.drawImage(
+            this.knightImage,
+            this.spriteAtual * this.knightWidth,
+            0,
+            this.knightWidth,
+            this.knightHeight,
+            this.x - this.radius / 1.1, this.y - this.radius / 0.8,
+            this.knightWidth * 1.2,
+            this.knightHeight * 1.2);       
+    }
+
+    move(limits) {
+      
+        if (pressedKeys.right === true && this.x <= limits.width - this.radius) {
+            this.x += this.speed
+            this.knightImage = this.knightSprite['right']
+            this.stop = false;
         }
 
         else if (pressedKeys.left === true && this.x >= this.radius) {
-            this.x -= this.speed,
-            this.totalSprites = 3,
-            this.knightImage.src = "../../img/knight_left.png"
+            this.x -= this.speed
+            this.knightImage = this.knightSprite['left']
+            this.stop = false;
         }
 
         else if (pressedKeys.up === true && this.y >= this.radius) {
-            this.y -= this.speed,
-            this.totalSprites = 3,
-            this.knightImage.src = "../../img/knight_up.png"
+            this.y -= this.speed
+            this.knightImage = this.knightSprite['up']
+            this.stop = false;
         }
 
-        else if (pressedKeys.down === true && this.y <= canvas.height - this.radius) {
-            this.y += this.speed,
-            this.totalSprites = 3,
-            this.knightImage.src = "../../img/knight_down.png"
+        else if (pressedKeys.down === true && this.y <= limits.height - this.radius) {
+            this.y += this.speed
+            this.knightImage = this.knightSprite['down']
+            this.stop = false;
         }
         else {
-            this.totalSprites = 3,
             this.spriteAtual = 1
-        }
-    }
-
-    move(key) {
-        switch (key) {
-            case "w": this.status = "up"; this.knightImage = this.knightSprite[this.status];
-            break;
-            case "a": this.status = "left"; this.knightImage = this.knightSprite[this.status];
-            break;
-            case "d": this.status = "right"; this.knightImage = this.knightSprite[this.status];
-            break;
-            case "s": this.status = "down"; this.knightImage = this.knightSprite[this.status];
-            break;
+            this.stop = true;
         }
     }
 }
