@@ -62,29 +62,36 @@ const init = async () => {
     animeSprite();
 };
 
-const animeSprite = () => {
-  setInterval(() => {
+/*const animeSprite = () => {
+  if (gameState) {
+    setInterval(() => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      knight.drawKnight(ctx, canvas, pressedKeys);
+      coin.drawCoin(ctx);
 
-  }, 1000 / (frames*spriteSpeed/10));
-}
+      contaMoedas();
+      atualiza();
+    }, 1000 / (frames*spriteSpeed/10));
+  }
+};*/
 
 const loop = () => {
     if (gameState) {
       setTimeout(() => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      knight.drawKnight(ctx);
-      coin.drawCoin(ctx);
-      arrows.forEach((arrow) => arrow.drawArrow(ctx));
-      knight.move({
-        width:canvas.width,
-        height:canvas.height
-      }, key, pressedKeys);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        knight.drawKnight(ctx, canvas, pressedKeys);
+        coin.drawCoin(ctx);
+        arrows.forEach((arrow) => arrow.drawArrow(ctx));
+        knight.move({
+          width:canvas.width,
+          height:canvas.height
+        }, key);
 
-      theme.currentTime == 0 && theme.play();
+        theme.currentTime == 0 && theme.play();
 
-      contaMoedas();
-      atualiza();
-      requestAnimationFrame(loop);
+        contaMoedas();
+        atualiza();
+        requestAnimationFrame(loop);
       }, 1000 / frames);
     }
 };

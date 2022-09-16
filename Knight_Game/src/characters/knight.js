@@ -35,7 +35,7 @@ export default class Knight extends Circ {
         }
     }
 
-    drawKnight(ctx) {
+    drawKnight(ctx, canvas, pressedKeys) {
         ctx.save();
         this.drawCirc(ctx);
         ctx.beginPath();
@@ -43,20 +43,49 @@ export default class Knight extends Circ {
         ctx.restore();
 
         //if (this.count <= 0) {
-            if (this.spriteAtual < this.totalSprites) {
+            //if (this.spriteAtual < this.totalSprites) {
                 ctx.drawImage(this.knightImage, this.spriteAtual * this.knightWidth, 0, this.knightWidth, this.knightHeight,
                 this.x - this.radius / 1.1, this.y - this.radius / 0.8, this.knightWidth * 1.2, this.knightHeight * 1.2);
                 this.spriteAtual++;
-            }
-            else {
+            //}
+            /*else {
             this.spriteAtual = 1;
             //this.count = 7;
         } //else {
           //  this.count--;
-        //}
+        //}*/
+        
+            this.spriteAtual = this.spriteAtual < this.totalSprites - 1 ? this.spriteAtual + 1 : 0  
+        if (pressedKeys.right === true && this.x <= canvas.width - this.radius) {
+            this.x += this.speed,
+            this.totalSprites = 3,
+            this.knightImage.src = "../../img/knight_right.png"
+        }
+
+        else if (pressedKeys.left === true && this.x >= this.radius) {
+            this.x -= this.speed,
+            this.totalSprites = 3,
+            this.knightImage.src = "../../img/knight_left.png"
+        }
+
+        else if (pressedKeys.up === true && this.y >= this.radius) {
+            this.y -= this.speed,
+            this.totalSprites = 3,
+            this.knightImage.src = "../../img/knight_up.png"
+        }
+
+        else if (pressedKeys.down === true && this.y <= canvas.height - this.radius) {
+            this.y += this.speed,
+            this.totalSprites = 3,
+            this.knightImage.src = "../../img/knight_down.png"
+        }
+        else {
+            this.totalSprites = 3,
+            this.spriteAtual = 1
+        }
     }
 
-    move(canvas, key, pressedKeys) {
+    move(key) {
         switch (key) {
             case "w": this.status = "up"; this.knightImage = this.knightSprite[this.status];
             break;
@@ -66,26 +95,6 @@ export default class Knight extends Circ {
             break;
             case "s": this.status = "down"; this.knightImage = this.knightSprite[this.status];
             break;
-        }
-
-        if (pressedKeys.right === true && this.x <= canvas.width - this.radius) {
-            this.x += this.speed,
-            this.knightImage.src = "../../img/knight_right.png"
-        }
-
-        if (pressedKeys.left === true && this.x >= this.radius) {
-            this.x -= this.speed,
-            this.knightImage.src = "../../img/knight_left.png"
-        }
-
-        if (pressedKeys.up === true && this.y >= this.radius) {
-            this.y -= this.speed,
-            this.knightImage.src = "../../img/knight_up.png"
-        }
-
-        if (pressedKeys.down === true && this.y <= canvas.height - this.radius) {
-            this.y += this.speed,
-            this.knightImage.src = "../../img/knight_down.png"
         }
     }
 }
