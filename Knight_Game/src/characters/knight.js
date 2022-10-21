@@ -53,7 +53,7 @@ export default class Knight extends Circ {
             0,
             this.knightWidth,
             this.knightHeight,
-            this.x - this.radius / 1.1, this.y - this.radius / 0.8,
+            this.x - this.radius / 1, this.y - this.radius / 0.7,
             this.knightWidth * 1.2,
             this.knightHeight * 1.2);       
     }

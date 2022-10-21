@@ -16,7 +16,7 @@ let coinSound;
 let theme;
 let deathSound;
 
-let knight = new Knight(300, 200, 30, 5, 120);
+let knight = new Knight(300, 200, 25, 5, 120);
 let coin = new Coin(200, 300, 17, 5);
 let arrow = new Arrow(0, 0, 5, 5);
 
