@@ -35,6 +35,6 @@ Execute este comando para instalar as dependências.
 ```bash
 npm install
 
-npm rum dev
+npm run dev
 
 ```
